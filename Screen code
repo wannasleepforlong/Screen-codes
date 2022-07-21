@@ -1,0 +1,76 @@
+#My coding begins from here
+
+
+screen save:
+
+    tag menu
+
+    imagemap:
+        ground "gui/picker/grounds.png"
+        idle "gui/picker/idles.png"
+        hover "gui/picker/hovers.png"
+        cache False
+
+
+        hotspot (478,210,68,58) clicked FilePage(1) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (478,269,68,58) clicked FilePage(2) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (478,326,68,58) clicked FilePage(3) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (478,385,68,58) clicked FilePage(4) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (478,444,68,58) clicked FilePage(5) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (478,502,68,58) clicked FilePage("auto") activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+
+        hotspot (32, 178, 420, 195) clicked FileSave(1):
+            use load_save_slot(number=1) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (32, 385, 420, 195) clicked FileSave(3):
+            use load_save_slot(number=3) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (570, 178, 420, 195) clicked FileSave(2):
+            use load_save_slot(number=2) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (570, 385, 420, 195) clicked FileSave(4):
+            use load_save_slot(number=4) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+
+        hotspot (949, 9, 63, 63) action Return() activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+
+screen load:
+
+   tag menu
+
+   imagemap:
+        ground "gui/picker/ground.png"
+        idle "gui/picker/idle.png"
+        hover "gui/picker/hover.png"
+        cache False
+
+        hotspot (478,210,68,58) clicked FilePage(1) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (478,269,68,58) clicked FilePage(2) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (478,326,68,58) clicked FilePage(3) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (478,385,68,58) clicked FilePage(4) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (478,444,68,58) clicked FilePage(5) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (478,502,68,58) clicked FilePage("auto") activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+
+        hotspot (32, 178, 420, 195) clicked FileLoad(1):
+            use load_save_slot(number=1) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (32, 385, 420, 195) clicked FileLoad(3):
+            use load_save_slot(number=3) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (570, 178, 420, 195) clicked FileLoad(2):
+            use load_save_slot(number=2) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+        hotspot (570, 385, 420, 195) clicked FileLoad(4):
+            use load_save_slot(number=4) activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+
+        hotspot (949, 9, 63, 63) action Return() activate_sound "sfx/menu/select.mp3" hover_sound "sfx/menu/hover.mp3"
+
+screen load_save_slot:
+    $ file_text = "% 2s. %s\n%s" % (
+                        FileSlotName(number, 4),
+                        FileTime(number, empty=_("Empty Slot")),
+                        FileSaveName(number))
+
+
+    add FileScreenshot(number) xpos 220 ypos 20
+    text file_text xpos 0 ypos 10 size 40 color "#ffffff" outlines [ (2, "#302B54") ] kerning 2 font "GOODDOG.TTF"
+
+    key "save_delete" action FileDelete(number)
+
+init -2 python:
+
+    config.thumbnail_width = 180
+    config.thumbnail_height = 150
